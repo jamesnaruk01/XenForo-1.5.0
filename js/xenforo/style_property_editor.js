@@ -1,6 +1,6 @@
 /*
  * XenForo style_property_editor.min.js
- * Copyright 2010-2015 XenForo Ltd.
+ * Copyright 2010-2016 XenForo Ltd.
  * Released under the XenForo License Agreement: http://xenforo.com/license-agreement
  */
 (function(b,g,h){XenForo.StylePropertyForm=function(c){c.bind("submit",function(){var a=b("#propertyTabs").data("XenForo.Tabs"),d=a.getCurrentTab(),a=a.api.getCurrentTab().closest("li.PropertyTab");c.find("input[name=tab_index]").val(d);c.find("input[name=tab_id]").val(a.attr("id"));var d=c.serialize(),e=c.find("input:not(input[type=hidden]), select, textarea"),f=b('<input type="hidden" name="_xfStylePropertiesData" />');e.each(function(){var a=b(this);a.data("attr-name",a.attr("name"));a.removeAttr("name")});

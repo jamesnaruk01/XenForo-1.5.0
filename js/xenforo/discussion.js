@@ -1,6 +1,6 @@
 /*
  * XenForo discussion.min.js
- * Copyright 2010-2015 XenForo Ltd.
+ * Copyright 2010-2016 XenForo Ltd.
  * Released under the XenForo License Agreement: http://xenforo.com/license-agreement
  */
 (function(c,h,i){XenForo.QuickReply=function(a){if(c("#messageList").length==0)return console.error("Quick Reply not possible for %o, no #messageList found.",a);var b=c('input[name="last_date"]',a);b.data("load-value")&&b.val(Math.max(b.val(),b.data("load-value")));var d=XenForo.MultiSubmitFix(a);this.scrollAndFocus=function(){c(i).scrollTop(a.offset().top);var b=XenForo.getEditorInForm(a);if(!b)return!1;b.$editor?b.focus(!0):b.focus();return this};a.data("QuickReply",this).bind({AutoValidationBeforeSubmit:function(a){if(c(a.clickedSubmitButton).is('input[name="more_options"]'))a.preventDefault(),

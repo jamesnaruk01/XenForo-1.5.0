@@ -1,6 +1,6 @@
 /*
  * XenForo file_uploader.min.js
- * Copyright 2010-2015 XenForo Ltd.
+ * Copyright 2010-2016 XenForo Ltd.
  * Released under the XenForo License Agreement: http://xenforo.com/license-agreement
  */
 (function(i){XenForo.FileUploader=function(d){var o=XenForo.AttachmentUploader(d),b=i(d.data("result")),j=b.find(".Progress"),l=j.find(".Meter"),h=b.find(".Filename"),f=b.find(".Delete"),g=0,c,e,k=function(){d.css({overflow:"",height:"",width:"",position:""})},m=function(){d.css({overflow:"hidden",height:"1px",width:"1px",position:"relative"})},n=function(a){c=a.swfUpload;e=null;setTimeout(function(){if(!h.is(":visible")){var c="";a.ajaxData&&i.each(a.ajaxData.error,function(a,b){c+=b+"\n"});o.swfAlert(a.file,

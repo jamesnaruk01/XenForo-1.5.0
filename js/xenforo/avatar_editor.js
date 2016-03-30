@@ -1,6 +1,6 @@
 /*
  * XenForo avatar_editor.min.js
- * Copyright 2010-2015 XenForo Ltd.
+ * Copyright 2010-2016 XenForo Ltd.
  * Released under the XenForo License Agreement: http://xenforo.com/license-agreement
  */
 (function(b,k){XenForo.AvatarEditor=function(a){this.__construct(a)};XenForo.AvatarEditor.prototype={__construct:function(a){this.$form=a.bind({submit:b.context(this,"saveChanges"),reset:b.context(this,"resetForm"),AutoInlineUploadComplete:b.context(this,"uploadComplete")});this.$cropObj=a.find(".AvatarCropControl").bind({dragstart:b.context(this,"dragStart"),dragend:b.context(this,"dragEnd"),drag:b.context(this,"drag")});this.$cropImg=this.$cropObj.find("img").load(b.context(this,"imageLoaded"));

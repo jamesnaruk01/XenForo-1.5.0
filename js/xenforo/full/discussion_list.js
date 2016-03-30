@@ -89,6 +89,8 @@
 					{
 						$discussionListItem.removeClass('AjaxProgress');
 
+						this.$editor.find('.titleField').focus();
+
 						$(document).trigger('TitlePrefixRecalc');
 
 					}, this));

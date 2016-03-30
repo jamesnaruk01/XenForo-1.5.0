@@ -27,7 +27,7 @@ if ($.tools === undefined) console.error('jQuery Tools is not loaded.');
 
 		try
 		{
-			_isTouchBrowserVal = !!('ontouchstart' in window);
+			_isTouchBrowserVal = !!('ontouchstart' in window || navigator.maxTouchPoints || navigator.msMaxTouchPoints);
 		}
 		catch(e)
 		{
@@ -785,6 +785,13 @@ if ($.tools === undefined) console.error('jQuery Tools is not loaded.');
 		_jsVersion: '',
 
 		/**
+		 * If true, disables reverse tabnabbing protection
+		 *
+		 * @var bool
+		 */
+		_noRtnProtect: false,
+
+		/**
 		 * CSRF Token
 		 *
 		 * @var string
@@ -908,6 +915,10 @@ if ($.tools === undefined) console.error('jQuery Tools is not loaded.');
 			});
 
 			XenForo.watchProxyLinks();
+			if (!XenForo._noRtnProtect)
+			{
+				XenForo.watchExternalLinks();
+			}
 
 			// make the breadcrumb and navigation responsive
 			if (!$html.hasClass('NoResponsive'))
@@ -1008,46 +1019,160 @@ if ($.tools === undefined) console.error('jQuery Tools is not loaded.');
 
 		watchProxyLinks: function()
 		{
-			var unproxyLink = function($link)
+			var proxyLinkClick = function(e)
 			{
-				if ($link.data('proxied') && $link.data('proxy-orig'))
+				var $this = $(this),
+					proxyHref = $this.data('proxy-href'),
+					lastEvent = $this.data('proxy-handler-last');
+
+				if (!proxyHref)
 				{
-					$link.attr('href', $link.data('proxy-orig'));
-					$link.data('proxied', false);
+					return;
 				}
+
+				// we may have a direct click event and a bubbled event. Ensure they don't both fire.
+				if (lastEvent && lastEvent == e.timeStamp)
+				{
+					return;
+				}
+				$this.data('proxy-handler-last', e.timeStamp);
+
+				XenForo.ajax(proxyHref, {}, function(ajaxData) {}, { error: false, global: false });
 			};
 
-			$(document).on('mousedown click', 'a.ProxyLink', function(e)
-			{
-				var $this = $(this);
-				if (!$this.data('proxied') && $this.data('proxy-href'))
+			$(document)
+				.on('click', 'a.ProxyLink', proxyLinkClick)
+				.on('focusin', 'a.ProxyLink', function(e)
 				{
-					$this.data('proxy-orig', $this.attr('href'));
-					$this.attr('href', $this.data('proxy-href'));
-					$this.data('proxied', true);
-
-					if (e.type == 'click')
+					// This approach is taken because middle click events do not bubble. This is a way of
+					// getting the equivalent of event bubbling on middle clicks in Chrome.
+					var $this = $(this);
+					if ($this.data('proxy-handler'))
 					{
-						setTimeout(function() {
-							unproxyLink($this);
-						}, 100);
+						return;
 					}
-				}
-			}).on('mouseup contextmenu', 'a.ProxyLink', function(e)
-			{
-				var $this = $(this);
 
-				if (e.type == 'mouseup')
+					$this.data('proxy-handler', true)
+						.click(proxyLinkClick);
+				});
+		},
+
+		watchExternalLinks: function()
+		{
+			var externalLinkClick = function(e)
+			{
+				if (e.isDefaultPrevented())
 				{
-					setTimeout(function() {
-						unproxyLink($this);
-					}, 100);
+					return;
+				}
+
+				var $this = $(this),
+					href = $this.attr('href'),
+					lastEvent = $this.data('blank-handler-last');
+				if (!href)
+				{
+					return;
+				}
+
+				if (href.match(/^[a-z]:/i) && !href.match(/^https?:/i))
+				{
+					// ignore canonical but non http(s) links
+					return;
+				}
+
+				href = XenForo.canonicalizeUrl(href);
+
+				var regex = new RegExp('^[a-z]+://' + location.host + '(/|$|:)', 'i');
+				if (regex.test(href) && !$this.hasClass('ProxyLink'))
+				{
+					// if the link is local, then don't do the special processing... unless it's a proxy link
+					// so it's likely to be external after the redirect
+					return;
+				}
+
+				// we may have a direct click event and a bubbled event. Ensure they don't both fire.
+				if (lastEvent && lastEvent == e.timeStamp)
+				{
+					return;
+				}
+
+				$this.data('blank-handler-last', e.timeStamp);
+
+				var ua = navigator.userAgent,
+					isOldIE = ua.indexOf('MSIE') !== -1,
+					isSafari = ua.indexOf('Safari') !== -1 && ua.indexOf('Chrome') == -1,
+					isGecko = ua.indexOf('Gecko/') !== -1;
+
+				if (e.shiftKey && isGecko)
+				{
+					// Firefox doesn't trigger when holding shift. If the code below runs, it will force
+					// opening in a new tab instead of a new window, so stop. Note that Chrome still triggers here,
+					// but it does open in a new window anyway so we run the normal code.
+					return;
+				}
+				if (isSafari && (e.shiftKey || e.altKey))
+				{
+					// this adds to reading list or downloads instead of opening a new tab
+					return;
+				}
+				if (isOldIE)
+				{
+					// IE has mitigations for this and this blocks referrers
+					return;
+				}
+
+				// now run the opener clearing
+
+				if (isSafari)
+				{
+					// Safari doesn't work with the other approach
+					// Concept from: https://github.com/danielstjules/blankshield
+					var $iframe, iframeDoc, $script;
+
+					$iframe = $('<iframe style="display: none" />').appendTo(document.body);
+					iframeDoc = $iframe[0].contentDocument || $iframe[0].contentWindow.document;
+
+					iframeDoc.__href = href; // set this so we don't need to do an eval-type thing
+
+					$script = $('<script />', iframeDoc);
+					$script[0].text = 'window.opener=null;' +
+						'window.parent=null;window.top=null;window.frameElement=null;' +
+						'window.open(document.__href).opener = null;';
+
+					iframeDoc.body.appendChild($script[0]);
+					$iframe.remove();
 				}
 				else
 				{
-					unproxyLink($this);
+					// use this approach for the rest to maintain referrers when possible
+					var w = window.open(href);
+
+					try
+					{
+						// this can potentially fail, don't want to break
+						w.opener = null;
+					}
+					catch (e) {}
 				}
-			});
+
+				e.preventDefault();
+			};
+
+			$(document)
+				.on('click', 'a[target=_blank]', externalLinkClick)
+				.on('focusin', 'a[target=_blank]', function(e)
+				{
+					// This approach is taken because middle click events do not bubble. This is a way of
+					// getting the equivalent of event bubbling on middle clicks in Chrome.
+					var $this = $(this);
+					if ($this.data('blank-handler'))
+					{
+						return;
+					}
+
+					$this.data('blank-handler', true)
+						.click(externalLinkClick);
+				});
 		},
 
 		/**
@@ -1115,6 +1240,11 @@ if ($.tools === undefined) console.error('jQuery Tools is not loaded.');
 
 				var callback = function()
 				{
+					if (!window.gapi)
+					{
+						return;
+					}
+
 					$(el).find('.GoogleLogin').each(function() {
 						var $button = $(this),
 							clientId = $button.data('client-id');
@@ -1144,7 +1274,7 @@ if ($.tools === undefined) console.error('jQuery Tools is not loaded.');
 					});
 				};
 
-				if (window.___gcfg)
+				if (window.___gcfg && window.gapi)
 				{
 					callback();
 				}
@@ -2563,7 +2693,7 @@ if ($.tools === undefined) console.error('jQuery Tools is not loaded.');
 			{
 				return url;
 			}
-			else if (url.match(/^https?:|ftp:|mailto:/i))
+			else if (url.match(/^(https?:|ftp:|mailto:)/i))
 			{
 				return url;
 			}
@@ -3556,6 +3686,10 @@ if ($.tools === undefined) console.error('jQuery Tools is not loaded.');
 
 			if (!this.menuEventsInitialized)
 			{
+				var $html = $('html'),
+					t = this,
+					htmlSize = [$html.width(), $html.height()];
+
 				// TODO: make this global?
 				// TODO: touch interfaces don't like this
 				$(document).bind({
@@ -3572,7 +3706,14 @@ if ($.tools === undefined) console.error('jQuery Tools is not loaded.');
 					$(document).click($.context(this, 'hideMenu'));
 				}
 
-				var $html = $('html'), t = this, htmlSize = [$html.width(), $html.height()];
+				$(document).on('HideAllMenus', function(e)
+				{
+					if (t.menuVisible)
+					{
+						t._hideMenu(e, true);
+					}
+				});
+
 				$(window).bind(
 				{
 					resize: function(e) {
@@ -3655,15 +3796,18 @@ if ($.tools === undefined) console.error('jQuery Tools is not loaded.');
 
 			this.highlightUnreadContent();
 
-			$input = this.$menu.find('input[type=text], input[type=search], textarea, select').first();
-			if ($input.length)
+			if (!XenForo.isTouchBrowser())
 			{
-				if ($input.data('nofocus'))
+				$input = this.$menu.find('input[type=text], input[type=search], textarea, select').first();
+				if ($input.length)
 				{
-					return;
-				}
+					if ($input.data('nofocus'))
+					{
+						return;
+					}
 
-				$input.select();
+					$input.select();
+				}
 			}
 		},
 
@@ -3846,10 +3990,6 @@ if ($.tools === undefined) console.error('jQuery Tools is not loaded.');
 				return false;
 			}
 
-			this.$menu.trigger('LoadComplete');
-
-			var $templateHtml = $(ajaxData.templateHtml);
-
 			// check for content destination
 			if (!this.contentDest)
 			{
@@ -3862,25 +4002,31 @@ if ($.tools === undefined) console.error('jQuery Tools is not loaded.');
 
 			var self = this;
 
-			// append the loaded content to the destination
-			$templateHtml.xfInsert(
-				this.$menu.data('insertfn') || 'appendTo',
-				this.contentDest,
-				'slideDown', 0,
-				function()
-				{
-					self.$menu.css('min-width', '199px');
-					setTimeout(function() {
-						self.$menu.css('min-width', '');
-					}, 0);
-					if (self.$control.hasClass('PopupOpen'))
-					{
-						self.menuShown();
-					}
-				}
-			);
+			new XenForo.ExtLoader(ajaxData, function(data) {
+				self.$menu.trigger('LoadComplete');
 
-			this.$menu.find('.Progress').removeClass('InProgress');
+				var $templateHtml = $(data.templateHtml);
+
+				// append the loaded content to the destination
+				$templateHtml.xfInsert(
+					self.$menu.data('insertfn') || 'appendTo',
+					self.contentDest,
+					'slideDown', 0,
+					function()
+					{
+						self.$menu.css('min-width', '199px');
+						setTimeout(function() {
+							self.$menu.css('min-width', '');
+						}, 0);
+						if (self.$control.hasClass('PopupOpen'))
+						{
+							self.menuShown();
+						}
+					}
+				);
+
+				self.$menu.find('.Progress').removeClass('InProgress');
+			});
 		},
 
 		resetLoader: function()
@@ -4964,6 +5110,10 @@ if ($.tools === undefined) console.error('jQuery Tools is not loaded.');
 				$('#QuickSearch').addClass('show');
 				$('#QuickSearchPlaceholder').addClass('hide');
 				$('#QuickSearchQuery').focus();
+				if (XenForo.isTouchBrowser())
+				{
+					$('#QuickSearchQuery').blur();
+				}
 			}, 0);
 		});
 
@@ -6064,10 +6214,10 @@ if ($.tools === undefined) console.error('jQuery Tools is not loaded.');
 			FB.init(fbInfo);
 			if (XenForo.Facebook.appId && XenForo.Facebook.fbUid)
 			{
-				FB.Event.subscribe('auth.sessionChange', XenForo.Facebook.sessionChange);
+				FB.Event.subscribe('auth.authResponseChange', XenForo.Facebook.sessionChange);
 				FB.getLoginStatus(XenForo.Facebook.sessionChange);
 
-				if (XenForo.visitor.user_id )
+				if (XenForo.visitor.user_id)
 				{
 					$(document).delegate('a.LogOut:not(.OverlayTrigger)', 'click', XenForo.Facebook.eLogOutClick);
 				}
@@ -6082,7 +6232,7 @@ if ($.tools === undefined) console.error('jQuery Tools is not loaded.');
 				XenForo.Facebook.fbUid = parseInt(cookieUid, 10);
 			}
 
-			if ($('.fb-post').length)
+			if ($('.fb-post, .fb-video').length)
 			{
 				XenForo.Facebook.forceInit = true;
 			}
@@ -6147,11 +6297,6 @@ if ($.tools === undefined) console.error('jQuery Tools is not loaded.');
 						);
 					}, 250);
 				}
-			}
-			else if (!authResponse && visitor.user_id)
-			{
-				// facebook user that is no longer logged in - log out
-				XenForo.Facebook.logout(null, true);
 			}
 		},
 

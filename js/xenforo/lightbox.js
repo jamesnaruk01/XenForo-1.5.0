@@ -1,6 +1,6 @@
 /*
  * XenForo lightbox.min.js
- * Copyright 2010-2015 XenForo Ltd.
+ * Copyright 2010-2016 XenForo Ltd.
  * Released under the XenForo License Agreement: http://xenforo.com/license-agreement
  */
 (function(a,p,q){XenForo.LightBox=function(r,u){var o=a("#LightBox").prop("unselectable",!0),m=o.find(".imageNav"),f=a("#LbImg"),j=o.find(".imageContainer"),n=[],g=a("#LbThumbs"),i=g.data("thumbheight"),k=0,l=0,s="";a("#LbPrev, #LbNext, #LightBox .imageContainer").click(a.context(function(b){b.preventDefault();this.shift(a(b.target).closest(".imageNav").attr("id")=="LbPrev"?-1:1);return!1},this));this.bindNav=function(){a(q).bind({"keydown.lightbox":a.context(function(a){switch(a.keyCode){case 37:case 38:return a.preventDefault(),

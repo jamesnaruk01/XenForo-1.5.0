@@ -64,6 +64,13 @@
 				}
 			});
 
+			$textInput.on('focus', function() {
+				$textInput.closest('.textCtrl').addClass('Focus');
+			});
+			$textInput.on('blur', function() {
+				$textInput.closest('.textCtrl').removeClass('Focus');
+			});
+
 			if ($input.prop('autofocus'))
 			{
 				$input.prop('autofocus', false);

@@ -1,6 +1,6 @@
 /*
  * XenForo form_filler.min.js
- * Copyright 2010-2015 XenForo Ltd.
+ * Copyright 2010-2016 XenForo Ltd.
  * Released under the XenForo License Agreement: http://xenforo.com/license-agreement
  */
 (function(f){XenForo._FormFiller={};XenForo.FormFillerControl=function(d){var b=d.closest("form"),e=b.data("FormFiller");e||(e=new XenForo.FormFiller(b),b.data("FormFiller",e));e.addControl(d)};XenForo.FormFiller=function(d){function b(a,c){if(XenForo.hasResponseError(c))return!1;f.each(c.formValues,function(a,c){var b=d.find(a);b.length&&(b.is(":checkbox, :radio")?b.prop("checked",c).triggerHandler("click"):b.is("select, input, textarea")&&b.val(c))});a.focus()}function e(a){var c=f(a.target).data("choice")||

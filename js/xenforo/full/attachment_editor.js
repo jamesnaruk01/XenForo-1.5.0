@@ -6,8 +6,25 @@
 	var insertSpeed = XenForo.speed.normal,
 		removeSpeed = XenForo.speed.fast;
 
+	var firstInitRun = false;
+
 	XenForo.AttachmentUploader = function($container)
 	{
+		if (!firstInitRun)
+		{
+			firstInitRun = true;
+
+			if ($.browser.mozilla && typeof SWFUpload == 'function')
+			{
+				$(function ()
+				{
+					var l = XenForo.isRTL() ? '9999em' : '-9999em',
+						$o = $('<object width="100" height="100" type="application/x-shockwave-flash" style="visibility: hidden; position: absolute; top: 0; left: '+l+'" />').appendTo('body');
+					setTimeout(function() { $o.remove(); }, 250);
+				});
+			}
+		}
+
 		var $trigger = $($container.data('trigger')),
 			$form = $container.closest('form'),
 
@@ -20,6 +37,10 @@
 			maxUploads = $container.data('maxuploads'),
 			extensions = $container.data('extensions'),
 			uniqueKey = $container.data('uniquekey');
+
+		extensions = extensions.replace(/[;*.]/g, '')
+			.replace(/,{2,}/g, ',')
+			.replace(/^,+/, '').replace(/,+$/, '');
 
 		// --------------------------------------
 
@@ -441,6 +462,20 @@
 		$('#AttachmentUploader').bind(
 		{
 			/**
+			 * Fires when the upload button is clicked
+			 */
+			click: function()
+			{
+				$('textarea.BbCodeWysiwygEditor').each(function() {
+					var ed = $(this).data('XenForo.BbCodeWysiwygEditor');
+					if (ed)
+					{
+						ed.blurEditor();
+					}
+				});
+			},
+
+			/**
 			 * Fires when a file is added to the upload queue
 			 *
 			 * @param event Including e.file
@@ -515,7 +550,12 @@
 
 				XenForo.alert(error + '<br /><br />' + e.file.name);
 
-				$('#' + e.file.id).xfRemove();
+				var $attachment = $('#' + e.file.id),
+					$editor = $attachment.closest('.AttachmentEditor');
+
+				$attachment.xfRemove(null, function() {
+					$editor.trigger('AttachmentsChanged');
+				}, removeSpeed, 'swing');
 
 				console.warn('AttachmentUploadError: %o', e);
 			},
@@ -711,15 +751,5 @@
 	XenForo.register('.AttachmentInsertAll', 'XenForo.AttachmentInsertAll');
 
 	XenForo.register('.AttachmentDeleteAll', 'XenForo.AttachmentDeleteAll');
-
-	if ($.browser.mozilla)
-	{
-		$(function ()
-		{
-			var l = XenForo.isRTL() ? '9999em' : '-9999em',
-				$o = $('<object width="100" height="100" type="application/x-shockwave-flash" style="visibility: hidden; position: absolute; top: 0; left: '+l+'" />').appendTo('body');
-			setTimeout(function() { $o.remove(); }, 250);
-		});
-	}
 }
 (jQuery, this, document);

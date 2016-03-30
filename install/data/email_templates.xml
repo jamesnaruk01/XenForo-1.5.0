@@ -732,13 +732,13 @@
 
 <h2 style="font-size: 18pt; font-weight: normal; margin: 10px 0">{$password}</h2>
 
-<p><a href="{xen:link canonical:index}" style="color: #176093">{xen:phrase log_in}</a></p>
+<p><a href="{xen:link canonical:login}" style="color: #176093">{xen:phrase log_in}</a></p>
 
 <p>{xen:phrase thanks}<br />
 {$xenOptions.boardTitle}</p>]]></body_html>
   </template>
   <template title="watched_forum_message">
-    <subject><![CDATA[{xen:phrase new_message_in_watched_forum_x, "title={$thread.titleCensored}"}]]></subject>
+    <subject><![CDATA[{xen:phrase new_message_in_watched_forum_x, "title={xen:helper threadPrefix, $thread, plain}{$thread.titleCensored}"}]]></subject>
     <body_text><![CDATA[{xen:phrase watched_forum_message_email_text, 
 	"receiver_username={$receiver.username}",
 	"username={$reply.username}",
@@ -798,7 +798,7 @@
 	'link_style=color: #969696; text-decoration: underline'}</p>]]></body_html>
   </template>
   <template title="watched_forum_message_messagetext">
-    <subject><![CDATA[{xen:phrase new_message_in_watched_forum_x, "title={$thread.titleCensored}"}]]></subject>
+    <subject><![CDATA[{xen:phrase new_message_in_watched_forum_x, "title={xen:helper threadPrefix, $thread, plain}{$thread.titleCensored}"}]]></subject>
     <body_text><![CDATA[{xen:phrase watched_forum_message_messagetext_email_text, 
 	"receiver_username={$receiver.username}",
 	"username={$reply.username}",
@@ -898,7 +898,7 @@
 	'link_style=color: #969696; text-decoration: underline'}</p>]]></body_html>
   </template>
   <template title="watched_forum_thread">
-    <subject><![CDATA[{xen:phrase new_thread_in_watched_forum_x, "title={$thread.titleCensored}"}]]></subject>
+    <subject><![CDATA[{xen:phrase new_thread_in_watched_forum_x, "title={xen:helper threadPrefix, $thread, plain}{$thread.titleCensored}"}]]></subject>
     <body_text><![CDATA[{xen:phrase watched_forum_thread_email_text, 
 	"receiver_username={$receiver.username}",
 	"username={$reply.username}",
@@ -958,7 +958,7 @@
 	'link_style=color: #969696; text-decoration: underline'}</p>]]></body_html>
   </template>
   <template title="watched_forum_thread_messagetext">
-    <subject><![CDATA[{xen:phrase new_thread_in_watched_forum_x, "title={$thread.titleCensored}"}]]></subject>
+    <subject><![CDATA[{xen:phrase new_thread_in_watched_forum_x, "title={xen:helper threadPrefix, $thread, plain}{$thread.titleCensored}"}]]></subject>
     <body_text><![CDATA[{xen:phrase watched_forum_thread_messagetext_email_text, 
 	"receiver_username={$receiver.username}",
 	"username={$reply.username}",
@@ -1058,7 +1058,7 @@
 	'link_style=color: #969696; text-decoration: underline'}</p>]]></body_html>
   </template>
   <template title="watched_thread_reply">
-    <subject><![CDATA[{xen:phrase reply_to_watched_thread_x, "title={$thread.titleCensored}"}]]></subject>
+    <subject><![CDATA[{xen:phrase reply_to_watched_thread_x, "title={xen:helper threadPrefix, $thread, plain}{$thread.titleCensored}"}]]></subject>
     <body_text><![CDATA[{xen:phrase watched_thread_reply_email_text, 
 	"receiver_username={$receiver.username}",
 	"username={$reply.username}",
@@ -1118,7 +1118,7 @@
 	'link_style=color: #969696; text-decoration: underline'}</p>]]></body_html>
   </template>
   <template title="watched_thread_reply_messagetext">
-    <subject><![CDATA[{xen:phrase reply_to_watched_thread_x, "title={$thread.titleCensored}"}]]></subject>
+    <subject><![CDATA[{xen:phrase reply_to_watched_thread_x, "title={xen:helper threadPrefix, $thread, plain}{$thread.titleCensored}"}]]></subject>
     <body_text><![CDATA[{xen:phrase watched_thread_reply_messagetext_email_text, 
 	"receiver_username={$receiver.username}",
 	"username={$reply.username}",

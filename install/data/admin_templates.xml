@@ -583,6 +583,11 @@
 					color: {xen:property mutedTextColor};
 				}
 				
+				#AdminSearchResults .blockLinksList a:active dfn
+				{
+					color: inherit;
+				}
+				
 			#AdminSearchResults .blockLinksList .icon
 			{
 				float: left;
@@ -1059,7 +1064,6 @@
 
 <xen:if is="{$canEditDefinition}">
 	<xen:topctrl>
-		<xen:if is="{$group.canEdit}"><a href="{xen:adminlink 'style-property-groups/edit', $group}" class="button">{xen:phrase edit_group}</a></xen:if>
 		<a href="{xen:adminlink 'style-property-groups/add', '', 'style_id=-1'}" class="button">+ {xen:phrase create_new_group}</a>
 	</xen:topctrl>
 </xen:if>
@@ -1092,6 +1096,7 @@
 
 <xen:if is="{$canEditDefinition}">
 	<xen:topctrl>
+		<xen:if is="{$group.canEdit}"><a href="{xen:adminlink 'style-property-groups/edit', $group}" class="button">{xen:phrase edit_group}</a></xen:if>
 		<a href="{xen:adminlink 'style-property-defs/add', '', 'style_id=-1'}" class="button">+ {xen:phrase create_new_property}</a>
 	</xen:topctrl>
 </xen:if>
@@ -1141,7 +1146,7 @@
 <xen:require js="js/xenforo/template_edit.js" />
 
 <xen:navigation>
-	<xen:breadcrumb href="{xen:adminlink admin-templates}#{xen:helper listitemid, $template.title}">{xen:phrase template_list}</xen:breadcrumb>
+	<xen:breadcrumb href="{xen:adminlink admin-templates}#{xen:helper listitemid, $template.template_id}">{xen:phrase template_list}</xen:breadcrumb>
 </xen:navigation>
 
 <xen:topctrl>
@@ -2167,7 +2172,7 @@ $(function() {
 <xen:require css="diff.css" />
 
 <div class="section">
-	<div class="overlayScroll overlayContain primaryContent ltr">
+	<div class="overlayScroll horizontalContain primaryContent ltr">
 		<ul class="diffList code">
 		<xen:foreach loop="$diffs" value="$diff">
 			<xen:set var="$diffHtml" value="{xen:helper implode, '<br />', {$diff.1}}" />
@@ -2187,7 +2192,7 @@ $(function() {
 
 <xen:form action="{xen:adminlink 'bb-codes/delete', $bbCode}" class="deleteConfirmForm formOverlay">
 	<p>{xen:phrase please_confirm_that_you_want_to_delete_following_bb_code}:</p>
-	<strong><a href="{xen:adminlink 'bb-codes/edit', $site}">[{$bbCode.bb_code_id}]</a></strong>
+	<strong><a href="{xen:adminlink 'bb-codes/edit', $bbCode}">[{$bbCode.bb_code_id}]</a></strong>
 
 	<xen:submitunit save="{xen:phrase delete_custom_bb_code}" />
 	<input type="hidden" name="_xfConfirm" value="1" />
@@ -4976,7 +4981,8 @@ label.radioTablet.checked
 	overflow: hidden;
 }
 
-#footer a:link
+#footer a:link,
+#footer a:visited
 {
 	color: inherit;
 	text-decoration: underline;
@@ -5245,7 +5251,7 @@ label.radioTablet.checked
 
 	<div id="logoLine">
 		<div class="pageWidth">
-			<img src="{xen:property imagePath}/xenforo/XenForo-small.png" id="logo" />
+			<img src="{xen:property imagePath}/xenforo/XenForo-small.png" id="logo" alt="{xen:phrase xenforo_logo}" />
 			<h2 id="version">XenForo {$xenOptions.currentVersion}</h2>
 			<a href="{xen:adminlink 'login/logout', '', '_xfToken={$visitor.csrf_token_page}'}" id="logoutLink">{xen:phrase log_out_x, 'name={$visitor.username}'}</a>
 		</div>
@@ -6517,7 +6523,7 @@ label.radioTablet.checked
   <template title="import_config_users"><![CDATA[<xen:title>{xen:phrase configure_user_import}</xen:title>
 
 <xen:form action="{xen:adminlink import/start-step}">
-	<xen:checkboxunit label="{xen:phrase automatically_merge_users}:">
+	<xen:checkboxunit label="{xen:phrase automatically_merge_users}:" explain="{xen:phrase import_users_share_names_emails_merge_change_accents}">
 		<xen:option label="{xen:phrase when_email_addresses_same}" name="options[mergeEmail]" selected="true" />
 		<xen:option label="{xen:phrase when_names_same}" name="options[mergeName]"  />
 	</xen:checkboxunit>
@@ -7477,6 +7483,7 @@ $(function() {
 body
 {
 	padding: 0 10px;
+	color: {xen:property primaryLighterStill};
 }
 
 #loginLogo
@@ -7567,6 +7574,11 @@ body
 		color: inherit;
 		text-decoration: underline;
 	}
+
+.errorOverlay
+{
+	text-align: center;
+}
 	
 @media (max-height:400px)
 {
@@ -7607,7 +7619,7 @@ body
 	{xen:raw $providerHtml}
 
 	<xen:checkboxunit label="">
-		<xen:option name="trust">
+		<xen:option name="trust" selected="{$trustChecked}">
 			<xen:label>{xen:phrase trust_this_device_for_30_days}</xen:label>
 			<xen:hint>{xen:phrase trust_device_desc}</xen:hint>
 		</xen:option>
@@ -7682,7 +7694,7 @@ body
   <template title="log_admin_view"><![CDATA[<xen:title>{xen:phrase admin_log_entry}</xen:title>
 
 <div class="section">
-	<div class="overlayScroll overlayContain">
+	<div class="overlayScroll horizontalContain">
 		<table width="100%">
 		<tr>
 			<th class="subHeading">{xen:phrase admin_log_entry}</th>
@@ -7982,7 +7994,7 @@ body
 			
 			<dl class="ctrlUnit">
 				<dt>{xen:phrase content}:</dt>
-				<dd><a href="{$entry.content_url}">{$entry.content_title}</a>, {$entry.content_username}</dd>
+				<dd><a href="{$entry.content_url}">{xen:raw $entry.content_title, object}</a>, {$entry.content_username}</dd>
 			</dl>
 		</form>
 	</div>
@@ -8056,7 +8068,7 @@ body
   <template title="log_server_error_view"><![CDATA[<xen:title>{xen:phrase server_error_log}</xen:title>
 
 <div class="section">
-	<div class="overlayScroll overlayContain">
+	<div class="overlayScroll horizontalContain">
 		<table width="100%">
 		<tr>
 			<th class="subHeading">{xen:phrase error_info}</th>
@@ -8133,7 +8145,7 @@ body
   <template title="log_spam_trigger_view"><![CDATA[<xen:title>{xen:phrase spam_trigger_log}</xen:title>
 
 <div class="section">
-	<div class="overlayScroll overlayContain">
+	<div class="overlayScroll horizontalContain">
 		<table width="100%">
 		<tr>
 			<td class="primaryContent">
@@ -8514,7 +8526,7 @@ body
 					<xen:explain>{xen:phrase notice_display_type_desc}</xen:explain>
 				</xen:radiounit>
 				
-				<div class="formHiderTarget disabled" id="ctrl_notice_type_floating_Disabler">
+				<div class="formHiderTarget disabled" id="ctrl_notice_type_floating_Disabler" style="display: none;">
 					<xen:radiounit label="{xen:phrase display_styling}:" name="display_style">
 						<xen:option value="primary" label="{xen:phrase primary}" selected="{$notice.display_style} == 'primary' || {$notice.notice_type} == 'block'" />
 						<xen:option value="secondary" label="{xen:phrase secondary}" selected="{$notice.display_style} == 'secondary'" />
@@ -9546,7 +9558,7 @@ hint="{$preparedOption.hint}">
 		<xen:disabled>
 			<div>{xen:phrase conversation_message}:</div>
 			<xen:textbox name="{$fieldPrefix}[{$preparedOption.option_id}][messageBody]" value="{$preparedOption.option_value.messageBody}" rows="5" inputclass="indented Elastic" />
-			<p class="hint">{xen:phrase following_placeholders_will_be_replaced_in_message_for_conversation} {xen:phrase you_may_also_use_phrase_title_which_will_be_replaced}</p>
+			<p class="hint">{xen:phrase following_placeholders_will_be_replaced_in_message_for_conversation} {xen:phrase you_may_also_use_phrase_title_which_will_be_replaced} {xen:phrase you_may_use_bb_code}</p>
 		</xen:disabled>
 		
 		<xen:disabled>
@@ -9966,6 +9978,7 @@ jQuery.extend(true, XenForo,
 	_csrfToken: "{$visitor.csrf_token_page}",
 	_csrfRefreshUrl: "{xen:jsescape {xen:adminlink login/csrf-token-refresh}}",
 	_jsversion: "{$xenOptions.jsVersion}",
+	_noRtnProtect: {xen:if $enableReverseTabnabbingProtection, 'false', 'true'},
 	_manualDeferUrl: "{xen:jsescape {xen:adminlink tools/run-deferred}}"
 });
 
@@ -10444,6 +10457,23 @@ label.secondaryContent + fieldset
 <xen:require css="permission_analyze.css" />
 
 <xen:if is="{$showResults}">
+	<xen:if is="{$user.user_state} != 'valid'">
+		<xen:set var="$userState">{xen:if "{$user.user_state} == 'email_confirm'", {xen:phrase awaiting_email_confirmation},
+			{xen:if "{$user.user_state} == 'email_confirm_edit'", {xen:phrase awaiting_email_confirmation_from_edit},
+			{xen:if "{$user.user_state} == 'email_bounce'", {xen:phrase email_invalid_bounced},
+			{xen:if "{$user.user_state} == 'moderated'", {xen:phrase awaiting_approval}, ''}
+		}}}</xen:set>
+
+		<p class="importantMessage">
+			{xen:phrase x_currently_user_state_y_receive_permissions_z_analysis, 
+				'user=<a href="{xen:adminlink users/edit, $user}">{$user.username}</a>',
+				'state={$userState}',
+				'group=<a href="{xen:adminlink user-groups/edit, $userGroups.1}">{$userGroups.1.title}</a>',
+				'valid_state={xen:phrase valid}'
+			}
+		</p>
+	</xen:if>
+
 	<div class="pairsColumns analysisResults section">
 		<xen:foreach loop="$interfaceGroups" value="$interfaceGroup">
 		<xen:if is="{$results.{$interfaceGroup.interface_group_id}}">
@@ -15240,7 +15270,7 @@ $(function()
 <xen:require css="diff.css" />
 
 <div class="section">
-	<div class="overlayScroll overlayContain primaryContent ltr">
+	<div class="overlayScroll horizontalContain primaryContent ltr">
 		<ul class="diffList code">
 		<xen:foreach loop="$diffs" value="$diff">
 			<xen:set var="$diffHtml" value="{xen:helper implode, '<br />', {$diff.1}}" />
@@ -15586,7 +15616,7 @@ $(function()
 <xen:require css="diff.css" />
 
 <div class="section">
-	<div class="overlayScroll overlayContain primaryContent ltr">
+	<div class="overlayScroll horizontalContain primaryContent ltr">
 		<ul class="diffList code">
 		<xen:foreach loop="$diffs" value="$diff">
 			<xen:set var="$diffHtml" value="{xen:helper implode, '<br />', {$diff.1}}" />
@@ -15598,7 +15628,7 @@ $(function()
   <template title="template_history_view"><![CDATA[<xen:title>{xen:phrase template_history}</xen:title>
 
 <div class="section historyText">
-	<div class="primaryContent overlayScroll overlayContain ltr">
+	<div class="primaryContent horizontalContain horizontalContain ltr">
 		<pre dir="ltr">{$history.template}</pre>
 	</div>
 </div>]]></template>
@@ -15870,7 +15900,7 @@ $(function()
 							id="{$template.template_id}"
 							href="{xen:adminlink templates/edit, $template}"
 							label="{$template.title}"
-							snippet="{xen:if '{$template.last_edit_date} AND {$template.outdated_by_date}', '{xen:phrase last_edited}: {xen:datetime $template.last_edit_date}, {xen:phrase parent_last_edited}: {xen:datetime $template.parent_last_edit_date}', '{xen:phrase custom_version}: {$template.version_string}, {xen:phrase parent_version}: {$template.parent_version_string}'}"
+							snippet="{xen:if $template.outdated_by_version, '{xen:phrase custom_version}: {$template.version_string}, {xen:phrase parent_version}: {$template.parent_version_string}', '{xen:phrase last_edited}: {xen:datetime $template.last_edit_date}, {xen:phrase parent_last_edited}: {xen:datetime $template.parent_last_edit_date}'}"
 						>
 							<xen:html>
 								<a href="{xen:adminlink templates/merge-outdated, $template}" class="secondaryContent">{xen:phrase merge_changes}</a>
@@ -15957,7 +15987,7 @@ $(function()
 <xen:require css="diff.css" />
 
 <div class="section">
-	<div class="overlayScroll overlayContain primaryContent ltr">
+	<div class="overlayScroll horizontalContain primaryContent ltr">
 		<ul class="diffList code">
 		<xen:foreach loop="$diffs" value="$diff">
 			<xen:set var="$diffHtml" value="{xen:helper implode, '<br />', {$diff.1}}" />
@@ -16959,7 +16989,7 @@ $(function() {
 <dl class="ctrlUnit">
 	<dt><label for="ctrl_backup_code">{xen:phrase backup_code}:</label></dt>
 	<dd>
-		<input type="text" name="code" id="ctrl_backup_code" class="textCtrl" />
+		<input type="text" name="code" id="ctrl_backup_code" class="textCtrl" autofocus="true" />
 	</dd>
 </dl>]]></template>
   <template title="two_step_email"><![CDATA[<p>{xen:phrase email_has_been_sent_to_x_with_code, 'email={$email}'}</p>
@@ -16967,7 +16997,7 @@ $(function() {
 <dl class="ctrlUnit">
 	<dt><label for="ctrl_email_code">{xen:phrase email_confirmation_code}:</label></dt>
 	<dd>
-		<input type="text" name="code" id="ctrl_email_code" class="textCtrl" />
+		<input type="text" name="code" id="ctrl_email_code" class="textCtrl" autofocus="true" />
 	</dd>
 </dl>]]></template>
   <template title="two_step_totp"><![CDATA[<xen:if is="{$context} == 'setup'">
@@ -16997,7 +17027,7 @@ $(function() {
 <dl class="ctrlUnit">
 	<dt><label for="ctrl_totp_code">{xen:phrase verification_code}:</label></dt>
 	<dd>
-		<input type="text" name="code" id="ctrl_totp_code" class="textCtrl" />
+		<input type="text" name="code" id="ctrl_totp_code" class="textCtrl" autofocus="true" />
 	</dd>
 </dl>]]></template>
   <template title="user_alert"><![CDATA[<xen:title>{xen:phrase alert_users}</xen:title>
@@ -17350,6 +17380,10 @@ $(function() {
 			</div>
 		</div>
 	</xen:topctrl>
+	
+	<xen:if is="{$success}">
+		<p class="importantMessage">{xen:phrase redirect_changes_saved_successfully}</p>
+	</xen:if>
 </xen:if>
 
 <div class="commaElements">
@@ -17460,6 +17494,7 @@ $(function() {
 					<xen:option value="email_confirm_edit">{xen:phrase awaiting_email_confirmation_from_edit}</xen:option>
 					<xen:option value="email_bounce">{xen:phrase email_invalid_bounced}</xen:option>
 					<xen:option value="moderated">{xen:phrase awaiting_approval}</xen:option>
+					<xen:explain>{xen:phrase when_user_state_non_valid_users_receive_permissions_guest_group, 'guest=<a href="{xen:adminlink user-groups/edit, {xen:array "user_group_id=1", "title={$userGroups.1}"}}" target="_blank">{$userGroups.1}</a>'}</xen:explain>
 				</xen:selectunit>
 			</fieldset>
 				
@@ -18232,7 +18267,9 @@ $(function() {
 				'{xen:phrase create_new_promotion}: <em>%s</em>'}" />
 				
 			<xen:checkboxunit label="">
-				<xen:option name="active" selected="{$promotion.active}">{xen:phrase promotion_is_active}</xen:option>
+				<xen:option name="active" selected="{$promotion.active}" label="{xen:phrase promotion_is_active}">
+					<xen:hint>{xen:phrase disabled_promotion_desc}</xen:hint>
+				</xen:option>
 			</xen:checkboxunit>
 	
 			<fieldset>
@@ -18612,6 +18649,10 @@ $(function() {
 	<h3 class="textHeading">{xen:phrase user_criteria}</h3>
 	
 	<div class="userCriteria">
+		<xen:checkboxunit label="">
+			<xen:option name="criteria[receive_admin_email]">{xen:phrase only_send_to_users_opting_to_receive_emails_from_admin}</xen:option>
+		</xen:checkboxunit>
+	
 		<xen:include template="helper_user_search_criteria" />
 	</div>
 	
@@ -19227,6 +19268,10 @@ $(function() {
 
 	</xen:if>
 </xen:form>
+
+<xen:if is="!{$supportTls12}">
+	<p class="importantMessage">{xen:phrase paypal_tls_12_requirements_missing_desc}</p>
+</xen:if>
 
 <xen:form action="{xen:adminlink 'options/save'}" class="AutoValidator OptIn">
 	<h3 class="subHeading">{xen:phrase payment_gateway_setup}</h3>

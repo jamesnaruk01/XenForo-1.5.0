@@ -28,7 +28,7 @@
 
 	<div id="logoLine">
 		<div class="pageWidth">
-			<img src="../styles/default/xenforo/XenForo-small.png" id="logo" />
+			<img src="../styles/default/xenforo/XenForo-small.png" id="logo" alt="XenForo Logo" />
 			<h2 id="version">XenForo <?php echo XenForo_Application::$version; ?></h2>
 		</div>
 	</div>

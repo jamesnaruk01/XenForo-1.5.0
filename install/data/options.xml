@@ -684,10 +684,11 @@ delay</sub_options>
     <relation group_id="logging" display_order="210"/>
   </option>
   <option option_id="ipv6InfoUrl" edit_format="textbox" data_type="string" can_backup="1">
-    <default_value>http://ip-lookup.net/index.php?ip={ip}</default_value>
+    <default_value>http://whatismyipaddress.com/ip/{ip}</default_value>
     <edit_format_params></edit_format_params>
     <sub_options></sub_options>
     <relation group_id="serviceProviders" display_order="120"/>
+    <relation group_id="spam" display_order="530"/>
   </option>
   <option option_id="jQuerySource" edit_format="radio" data_type="string" can_backup="1">
     <default_value>local</default_value>

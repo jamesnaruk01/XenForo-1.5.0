@@ -65,7 +65,7 @@
     <permission permission_group_id="general" permission_id="maxTaggedUsers" permission_type="integer" default_value_int="0" interface_group_id="generalPermissions" display_order="100"/>
     <permission permission_group_id="general" permission_id="report" permission_type="flag" default_value="unset" interface_group_id="generalPermissions" display_order="12000"/>
     <permission permission_group_id="general" permission_id="requireTfa" permission_type="flag" default_value="unset" interface_group_id="generalPermissions" display_order="510"/>
-    <permission permission_group_id="general" permission_id="search" permission_type="flag" default_value="unset" interface_group_id="generalPermissions" display_order="100"/>
+    <permission permission_group_id="general" permission_id="search" permission_type="flag" default_value="unset" interface_group_id="generalPermissions" display_order="90"/>
     <permission permission_group_id="general" permission_id="view" permission_type="flag" default_value="allow" interface_group_id="generalPermissions" display_order="1"/>
     <permission permission_group_id="general" permission_id="viewIps" permission_type="flag" default_value="unset" interface_group_id="generalModeratorPermissions" display_order="10"/>
     <permission permission_group_id="general" permission_id="viewMemberList" permission_type="flag" default_value="unset" interface_group_id="generalPermissions" display_order="45"/>

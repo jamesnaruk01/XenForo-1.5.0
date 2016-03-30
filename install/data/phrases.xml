@@ -341,7 +341,7 @@ In the event that some of the selected threads are not eligible to have the sele
   <phrase title="approve_posts" version_id="1000015" version_string="1.0.0 Alpha 5"><![CDATA[Approve Posts]]></phrase>
   <phrase title="approve_threads" version_id="1000015" version_string="1.0.0 Alpha 5"><![CDATA[Approve Threads]]></phrase>
   <phrase title="archive_import_log" version_id="1000170" version_string="1.0.1"><![CDATA[Archive the import log table?]]></phrase>
-  <phrase title="archive_import_log_explain" version_id="1000170" version_string="1.0.1"><![CDATA[You may archive the import log to a new database table by specifying a unique name here. For full details see this help article: <b>http://xenforo.com/help/import-redirection/</b> for Import Redirection.]]></phrase>
+  <phrase title="archive_import_log_explain" version_id="1000170" version_string="1.0.1"><![CDATA[You may archive the import log to a new database table by specifying a unique name here. For full details see this help article: Import Redirection.]]></phrase>
   <phrase title="archive_the_import_log" version_id="1000170" version_string="1.0.1"><![CDATA[Archive the import log to this new table]]></phrase>
   <phrase title="are_you_sure_you_want_to_complete_this_import_cant_resume" version_id="1000016" version_string="1.0.0 Alpha 6"><![CDATA[Are you sure you want to complete this import? If you do this, you will not be able to resume the import from the current point.]]></phrase>
   <phrase title="argument_must_be_string" version_id="0" version_string=""><![CDATA[Argument must be a string]]></phrase>
@@ -1176,6 +1176,7 @@ To stop receiving email, please edit your contact preferences:
   <phrase title="did_not_complete_the_captcha_verification_properly" version_id="0" version_string=""><![CDATA[You did not complete the CAPTCHA verification properly. Please try again.]]></phrase>
   <phrase title="disable" version_id="1000016" version_string="1.0.0 Alpha 6"><![CDATA[Disable]]></phrase>
   <phrase title="disabled" version_id="1050010" version_string="1.5.0 Alpha"><![CDATA[Disabled]]></phrase>
+  <phrase title="disabled_promotion_desc" version_id="1050670" version_string="1.5.6"><![CDATA[When disabled, new users will not receive this promotion and existing users will not be demoted.]]></phrase>
   <phrase title="disabled_user_upgrades" version_id="1000016" version_string="1.0.0 Alpha 6"><![CDATA[Disabled User Upgrades]]></phrase>
   <phrase title="disables_selected_user_upgrades_while_this_upgrade_is_active" version_id="1000016" version_string="1.0.0 Alpha 6"><![CDATA[Disables the selected user upgrades while this upgrade is active. This is helpful if you have tiers of the same upgrade and don't want people to buy multiple levels.]]></phrase>
   <phrase title="disable_add_ons" version_id="1050010" version_string="1.5.0 Alpha"><![CDATA[Disable Add-ons]]></phrase>
@@ -1732,7 +1733,7 @@ Your callback should return an HTML string, and have a signature as follows:<br 
   <phrase title="import_attached_files" version_id="1000170" version_string="1.0.1"><![CDATA[Import Attached Files]]></phrase>
   <phrase title="import_buddy_ignore_lists" version_id="1020032" version_string="1.2.0 Beta 2"><![CDATA[Import Buddy and Ignore Lists]]></phrase>
   <phrase title="import_completed" version_id="1000016" version_string="1.0.0 Alpha 6"><![CDATA[Import Completed]]></phrase>
-  <phrase title="import_content_tags" version_id="1050010" version_string="1.5.0 Alpha"><![CDATA[Import content tags]]></phrase>
+  <phrase title="import_content_tags" version_id="1050670" version_string="1.5.6"><![CDATA[Import Content Tags]]></phrase>
   <phrase title="import_conversations" version_id="1050051" version_string="1.5.0 Release Candidate 1"><![CDATA[Import Conversations]]></phrase>
   <phrase title="import_custom_avatars" version_id="1000170" version_string="1.0.1"><![CDATA[Import Custom Avatars]]></phrase>
   <phrase title="import_custom_bb_codes" version_id="1030010" version_string="1.3.0 Alpha"><![CDATA[Import Custom BB Codes]]></phrase>
@@ -1757,6 +1758,7 @@ Your callback should return an HTML string, and have a signature as follows:<br 
 ]]></phrase>
   <phrase title="import_from_directory_on_server" version_id="1030010" version_string="1.3.0 Alpha"><![CDATA[Import from a directory on your server]]></phrase>
   <phrase title="import_from_uploaded_xml_file" version_id="1030010" version_string="1.3.0 Alpha"><![CDATA[Import from uploaded XML file]]></phrase>
+  <phrase title="import_ignored_users" version_id="1050370" version_string="1.5.3"><![CDATA[Import Ignored Users]]></phrase>
   <phrase title="import_infractions" version_id="1020035" version_string="1.2.0 Beta 5"><![CDATA[Import Infractions]]></phrase>
   <phrase title="import_in_progress" version_id="1000016" version_string="1.0.0 Alpha 6"><![CDATA[Import in Progress]]></phrase>
   <phrase title="import_is_currently_in_progress_if_returning_click" version_id="1000016" version_string="1.0.0 Alpha 6"><![CDATA[An import is currently in progress. If you are returning to continue the import, click the button below to continue where you left off.]]></phrase>
@@ -1791,6 +1793,7 @@ Note that enabling the name calculation at import time can cause this step to ru
   <phrase title="import_threads_and_posts" version_id="1000170" version_string="1.0.1"><![CDATA[Import Threads and Posts]]></phrase>
   <phrase title="import_thread_prefixes" version_id="1010010" version_string="1.1.0 Alpha"><![CDATA[Import Thread Prefixes]]></phrase>
   <phrase title="import_users" version_id="1000016" version_string="1.0.0 Alpha 6"><![CDATA[Import Users]]></phrase>
+  <phrase title="import_users_share_names_emails_merge_change_accents" version_id="1050370" version_string="1.5.3"><![CDATA[Users that share names or emails will need to be merged or changed at the end of this step. Note that names which differ only by accents are considered to be identical.]]></phrase>
   <phrase title="import_user_groups" version_id="1000170" version_string="1.0.1"><![CDATA[Import User Groups]]></phrase>
   <phrase title="import_user_status_updates" version_id="1000170" version_string="1.0.1"><![CDATA[Import User Status Updates]]></phrase>
   <phrase title="import_user_upgrades" version_id="1020070" version_string="1.2.0"><![CDATA[Import User Upgrades]]></phrase>
@@ -2706,7 +2709,7 @@ This option requires that the specified bounce account is a catch-all account or
   <phrase title="option_extraCaptchaKeys" version_id="1040010" version_string="1.4.0 Alpha"><![CDATA[Extra CAPTCHA Keys]]></phrase>
   <phrase title="option_extraCaptchaKeys_explain" version_id="1040010" version_string="1.4.0 Alpha"><![CDATA[This option can't be edited manually. It is edited only via the "captcha" option.]]></phrase>
   <phrase title="option_facebookAdmins" version_id="1000053" version_string="1.0.0 Release Candidate 3"><![CDATA[Facebook Page Admins]]></phrase>
-  <phrase title="option_facebookAdmins_explain" version_id="1000370" version_string="1.0.3"><![CDATA[Use the boxes here to enter the <b>http://xenforo.com/help/facebook-user-id/</b> Facebook User IDs of any users you would like to be able to administer Liked pages.]]></phrase>
+  <phrase title="option_facebookAdmins_explain" version_id="1000370" version_string="1.0.3"><![CDATA[Use the boxes here to enter the Facebook User IDs of any users you would like to be able to administer Liked pages.]]></phrase>
   <phrase title="option_facebookAdmins_hint" version_id="1000053" version_string="1.0.0 Release Candidate 3"><![CDATA[This field is not required if you have provided an application ID.]]></phrase>
   <phrase title="option_facebookAppId" version_id="0" version_string=""><![CDATA[Facebook Application ID]]></phrase>
   <phrase title="option_facebookAppId_explain" version_id="1020170" version_string="1.2.1"><![CDATA[The ID that is associated with your <a href="https://developers.facebook.com/apps" target="_blank">Facebook application</a> for this domain.]]></phrase>
@@ -2875,7 +2878,7 @@ It is possible to filter the news feed down to just users you follow, or a singl
   <phrase title="option_minifyCss" version_id="1000070" version_string="1.0.0"><![CDATA[Minify CSS]]></phrase>
   <phrase title="option_minifyCss_explain" version_id="1010010" version_string="1.1.0 Alpha"><![CDATA[If true, CSS will be run through <a href="http://code.google.com/p/minify/" target="_blank">minify</a> before being served.<br />
 <br />
-<b>Note</b>: The minification process is processor intensive, and you should only enable this option if you have also <b>http://xenforo.com/help/cache/</b> implemented a caching mechanism in your library/config.php file.]]></phrase>
+<b>Note</b>: The minification process is processor intensive, and you should only enable this option if you have also implemented a caching mechanism in your library/config.php file.]]></phrase>
   <phrase title="option_moderatorLogLength" version_id="1010010" version_string="1.1.0 Alpha"><![CDATA[Moderator Log Length (Days)]]></phrase>
   <phrase title="option_moderatorLogLength_explain" version_id="1010010" version_string="1.1.0 Alpha"><![CDATA[The number of days that moderator log records will be kept for. Use 0 to keep the records permanently.]]></phrase>
   <phrase title="option_multiQuote" version_id="1040570" version_string="1.4.5"><![CDATA[Enable Multi-Quote]]></phrase>
@@ -2891,7 +2894,7 @@ It is possible to filter the news feed down to just users you follow, or a singl
   <phrase title="option_payPalAlternateAccounts" version_id="1030170" version_string="1.3.1"><![CDATA[PayPal Alternate Accounts]]></phrase>
   <phrase title="option_payPalAlternateAccounts_explain" version_id="1030170" version_string="1.3.1"><![CDATA[Enter the email address of any PayPal accounts other than the primary one that may receive payments for user upgrades. This can be useful if the primary account is changed and recurring payments are still coming from the old account, for example. If the old account is not listed as a valid alternative, payments will not be accepted for this account. Enter one account per line.]]></phrase>
   <phrase title="option_payPalPrimaryAccount" version_id="0" version_string=""><![CDATA[PayPal Primary Account Email]]></phrase>
-  <phrase title="option_payPalPrimaryAccount_explain" version_id="1010270" version_string="1.1.2"><![CDATA[This is the primary email address on your PayPal account. If this is incorrect, payments may not be processed successfully. Note this must be a PayPal Premier or Business account and IPNs must be enabled. Please see our <b>http://xenforo.com/help/user-upgrades/</b> for help.]]></phrase>
+  <phrase title="option_payPalPrimaryAccount_explain" version_id="1010270" version_string="1.1.2"><![CDATA[This is the primary email address on your PayPal account. If this is incorrect, payments may not be processed successfully. Note this must be a PayPal Premier or Business account and IPNs must be enabled. Please see our help.]]></phrase>
   <phrase title="option_plusone" version_id="1000370" version_string="1.0.3"><![CDATA[Enable Google +1 Button]]></phrase>
   <phrase title="option_plusone_explain" version_id="1030170" version_string="1.3.1"><![CDATA[Google's <a href="https://developers.google.com/+/web/+1button/" target="_blank">+1 button</a> feature allows your visitors to recommend pages from your XenForo installation to others.]]></phrase>
   <phrase title="option_pollMaximumResponses" version_id="0" version_string=""><![CDATA[Maximum Number of Poll Choices]]></phrase>
@@ -3087,6 +3090,7 @@ Thanks,
   <phrase title="payment" version_id="1030010" version_string="1.3.0 Alpha"><![CDATA[Payment]]></phrase>
   <phrase title="payment_automatically_aken_every_time_period_to_keep_active" version_id="1000016" version_string="1.0.0 Alpha 6"><![CDATA[A payment will automatically be taken every time period to keep the upgrade active.]]></phrase>
   <phrase title="payment_gateway_setup" version_id="1000016" version_string="1.0.0 Alpha 6"><![CDATA[Payment Gateway Setup]]></phrase>
+  <phrase title="paypal_tls_12_requirements_missing_desc" version_id="1050670" version_string="1.5.6"><![CDATA[Starting June 18, 2016, PayPal will require all requests to use TLS 1.2 and your server have the required SSL libraries to support this. Without TLS 1.2 support, user upgrades will not be processed correctly. Please contact your host or system administrator for guidance.]]></phrase>
   <phrase title="people_may_reply_to_this_thread" version_id="1000015" version_string="1.0.0 Alpha 5"><![CDATA[People may reply to this thread]]></phrase>
   <phrase title="people_who_may" version_id="1000015" version_string="1.0.0 Alpha 5"><![CDATA[People Who May]]></phrase>
   <phrase title="people_x_follows" version_id="1000016" version_string="1.0.0 Alpha 6"><![CDATA[People {name} Follows]]></phrase>
@@ -3509,7 +3513,7 @@ Note that account changes such as bans will not be reflected by this system. You
   <phrase title="preview_feed_entry" version_id="1000051" version_string="1.0.0 Release Candidate 1"><![CDATA[Preview Feed Entry]]></phrase>
   <phrase title="preview_message" version_id="1050010" version_string="1.5.0 Alpha"><![CDATA[Preview Message]]></phrase>
   <phrase title="previously_imported_data_found" version_id="1000170" version_string="1.0.1"><![CDATA[Previously Imported, Unarchived Data Has Been Found]]></phrase>
-  <phrase title="previously_imported_data_has_been_found_redirect_break" version_id="1000170" version_string="1.0.1"><![CDATA[If you are currently redirecting URLs from a previous import to XenForo or intend to do so, these redirections will stop working if you begin another import without archiving the data to a new database table. For full details see this help article: <b>http://xenforo.com/help/import-redirection/</b> for Import Redirection.]]></phrase>
+  <phrase title="previously_imported_data_has_been_found_redirect_break" version_id="1000170" version_string="1.0.1"><![CDATA[If you are currently redirecting URLs from a previous import to XenForo or intend to do so, these redirections will stop working if you begin another import without archiving the data to a new database table. For full details see this help article: Import Redirection.]]></phrase>
   <phrase title="previous_moderation_action_logs_may_have_been_removed" version_id="1030010" version_string="1.3.0 Alpha"><![CDATA[Previous moderation action logs may have been removed.]]></phrase>
   <phrase title="primary" version_id="1050010" version_string="1.5.0 Alpha"><![CDATA[Primary]]></phrase>
   <phrase title="primary_user_group" version_id="1000170" version_string="1.0.1"><![CDATA[Primary User Group]]></phrase>
@@ -5116,10 +5120,11 @@ Error message: <span class="exceptionMessage">{message}</span>]]></phrase>
   <phrase title="this_is_used_to_uniquely_identify_modification_across_add_on_upgrades" version_id="1020010" version_string="1.2.0 Alpha"><![CDATA[This is used to uniquely identify a modification across add-on upgrades.]]></phrase>
   <phrase title="this_link_could_not_be_verified" version_id="1020010" version_string="1.2.0 Alpha"><![CDATA[This link could not be verified. Please try from another link.]]></phrase>
   <phrase title="this_link_is_not_usable_by_you" version_id="1020010" version_string="1.2.0 Alpha"><![CDATA[This link is not usable by you.]]></phrase>
-  <phrase title="this_members_information_not_currently_editable" version_id="1040470" version_string="1.4.4"><![CDATA[This members' information is not currently editable.]]></phrase>
+  <phrase title="this_members_information_not_currently_editable" version_id="1050170" version_string="1.5.1"><![CDATA[This member's information is not currently editable.]]></phrase>
   <phrase title="this_member_does_not_have_any_content" version_id="1050010" version_string="1.5.0 Alpha"><![CDATA[This member does not have any content.]]></phrase>
   <phrase title="this_member_has_not_been_warned" version_id="1010010" version_string="1.1.0 Alpha"><![CDATA[This member has not been warned.]]></phrase>
   <phrase title="this_member_matches_email_address_associated_with_your_external_account" version_id="1030010" version_string="1.3.0 Alpha"><![CDATA[This member matches the email address associated with your external account.]]></phrase>
+  <phrase title="this_member_viewing_invalid_no_permission_page" version_id="1050170" version_string="1.5.1"><![CDATA[This member is viewing an invalid page or a page they don't have permission to see.]]></phrase>
   <phrase title="this_message_by_x_has_been_removed_from_view" version_id="1000015" version_string="1.0.0 Alpha 5"><![CDATA[This message by {name} has been removed from public view.]]></phrase>
   <phrase title="this_message_has_been_removed_from_public_view" version_id="1000015" version_string="1.0.0 Alpha 5"><![CDATA[This message has been removed from public view.]]></phrase>
   <phrase title="this_message_is_awaiting_moderator_approval_and_is_invisible_to_normal" version_id="1000015" version_string="1.0.0 Alpha 5"><![CDATA[This message is awaiting moderator approval, and is invisible to normal visitors.]]></phrase>
@@ -5233,6 +5238,8 @@ Error message: <span class="exceptionMessage">{message}</span>]]></phrase>
 			Once you have done this, you will need to scan the QR code below into the app and enter the generated code below to confirm.]]></phrase>
   <phrase title="totp_this_will_regenerate_secret" version_id="1050010" version_string="1.5.0 Alpha"><![CDATA[This will regenerate the secret that will be used for verification in order to move the data to a new device. Once completed, codes generated using the old secret will no longer work.]]></phrase>
   <phrase title="to_access_this_page_you_must_first_confirm_your_password" version_id="1050010" version_string="1.5.0 Alpha"><![CDATA[To access this page, you must first confirm your password.]]></phrase>
+  <phrase title="to_associate_existing_account_first_log_in" version_id="1050370" version_string="1.5.3"><![CDATA[To associate with an existing account, you must first log into that account.]]></phrase>
+  <phrase title="to_associate_existing_account_first_log_in_start_via_external_accounts" version_id="1050370" version_string="1.5.3"><![CDATA[To associate with an existing account, you must first log into that account and then start the association via the <a href="{link}">external accounts area</a>.]]></phrase>
   <phrase title="to_test_facebook_integration_must_enter_application_info" version_id="1000035" version_string="1.0.0 Beta 5"><![CDATA[To test Facebook integration, you must first enter your <a href="{url}">Facebook application information</a>.]]></phrase>
   <phrase title="to_test_twitter_integration_must_enter_application_info" version_id="1030170" version_string="1.3.1"><![CDATA[To test Twitter integration, you must first enter your <a href="{url}">Twitter application information</a>.]]></phrase>
   <phrase title="transaction_id" version_id="1030010" version_string="1.3.0 Alpha"><![CDATA[Transaction ID]]></phrase>
@@ -5915,6 +5922,7 @@ To disable all emails:
   <phrase title="when_email_addresses_same" version_id="1000016" version_string="1.0.0 Alpha 6"><![CDATA[When email addresses are the same]]></phrase>
   <phrase title="when_names_same" version_id="1000016" version_string="1.0.0 Alpha 6"><![CDATA[When names are the same]]></phrase>
   <phrase title="when_payment_has_been_approved_your_account_will_be_upgraded" version_id="1000015" version_string="1.0.0 Alpha 5"><![CDATA[When the payment has been approved, your account will be upgraded.]]></phrase>
+  <phrase title="when_user_state_non_valid_users_receive_permissions_guest_group" version_id="1050670" version_string="1.5.6"><![CDATA[When in a user state other than 'Valid', users will receive permissions from the {guest} group.]]></phrase>
   <phrase title="which_forums_do_you_want_to_mark_as_read" version_id="1010010" version_string="1.1.0 Alpha"><![CDATA[Which forums do you want to mark as read?]]></phrase>
   <phrase title="while_at_or_above_points_threshold" version_id="1030010" version_string="1.3.0 Alpha"><![CDATA[While at or above points threshold]]></phrase>
   <phrase title="width" version_id="1000016" version_string="1.0.0 Alpha 6"><![CDATA[Width]]></phrase>
@@ -5929,7 +5937,7 @@ To disable all emails:
   <phrase title="word_or_phrase" version_id="1000016" version_string="1.0.0 Alpha 6"><![CDATA[Word or Phrase]]></phrase>
   <phrase title="write_something" version_id="1000016" version_string="1.0.0 Alpha 6"><![CDATA[Write something]]></phrase>
   <phrase title="xenforo_admin_control_panel_requires_javascript" version_id="1000016" version_string="1.0.0 Alpha 6"><![CDATA[The XenForo Admin Control Panel requires JavaScript. Please enable it before proceeding.]]></phrase>
-  <phrase title="xenforo_copyright" version_id="1040470" version_string="1.4.4"><![CDATA[Forum software by XenForo&trade; <span>&copy;2010-2015 XenForo Ltd.</span>]]></phrase>
+  <phrase title="xenforo_copyright" version_id="1050570" version_string="1.5.5"><![CDATA[Forum software by XenForo&trade; <span>&copy;2010-2016 XenForo Ltd.</span>]]></phrase>
   <phrase title="xenforo_logo" version_id="1000017" version_string="1.0.0 Alpha 7"><![CDATA[XenForo Logo]]></phrase>
   <phrase title="xs_recent_activity" version_id="1000015" version_string="1.0.0 Alpha 5"><![CDATA[{name}'s Recent Activity]]></phrase>
   <phrase title="xs_reported_content" version_id="1020010" version_string="1.2.0 Alpha"><![CDATA[{name}'s Reported Content]]></phrase>
@@ -5940,6 +5948,7 @@ To disable all emails:
   <phrase title="x_commented_on_your_post_on_ys_profile" version_id="1000015" version_string="1.0.0 Alpha 5"><![CDATA[{name} commented on <a {post_params}>your post</a> on {profile}'s profile.]]></phrase>
   <phrase title="x_commented_on_your_status" version_id="1000015" version_string="1.0.0 Alpha 5"><![CDATA[{name} commented on <a {status_attributes}>your status</a>.]]></phrase>
   <phrase title="x_commented_on_ys_post_on_your_profile" version_id="1000015" version_string="1.0.0 Alpha 5"><![CDATA[{name} commented on <a {post_attributes}>{poster}'s post</a> on your profile.]]></phrase>
+  <phrase title="x_currently_user_state_y_receive_permissions_z_analysis" version_id="1050670" version_string="1.5.6"><![CDATA[As {user} is currently in the user state '{state}', they will receive permissions from the {group} user group when browsing. This analysis shows permissions as if their user state is '{valid_state}'.]]></phrase>
   <phrase title="x_days" version_id="1040010" version_string="1.4.0 Alpha"><![CDATA[{days} Days]]></phrase>
   <phrase title="x_does_not_follow_anyone" version_id="1000015" version_string="1.0.0 Alpha 5"><![CDATA[{name} does not follow anyone.]]></phrase>
   <phrase title="x_for_one_day" version_id="0" version_string=""><![CDATA[{cost} for 1 day]]></phrase>
@@ -6148,8 +6157,8 @@ Associating with Twitter makes it easier to log in to the forum or share content
   <phrase title="you_may_only_follow_x_people" version_id="1020270" version_string="1.2.2"><![CDATA[You may only follow a total of {count} people.]]></phrase>
   <phrase title="you_may_only_invite_x_members_to_join_this_conversation" version_id="0" version_string=""><![CDATA[You may only invite {count} members to join this conversation.]]></phrase>
   <phrase title="you_may_select_up_to_x_choices" version_id="1040010" version_string="1.4.0 Alpha"><![CDATA[You may select up to {max} choices.]]></phrase>
-  <phrase title="you_may_use_bb_code" version_id="1000015" version_string="1.0.0 Alpha 5"><![CDATA[You may use BB code]]></phrase>
-  <phrase title="you_may_use_html" version_id="1000016" version_string="1.0.0 Alpha 6"><![CDATA[You may use HTML]]></phrase>
+  <phrase title="you_may_use_bb_code" version_id="1050170" version_string="1.5.1"><![CDATA[You may use BB code.]]></phrase>
+  <phrase title="you_may_use_html" version_id="1050170" version_string="1.5.1"><![CDATA[You may use HTML.]]></phrase>
   <phrase title="you_may_use_placeholders_to_dynamically_insert_warning" version_id="1030010" version_string="1.3.0 Alpha"><![CDATA[You may use the following placeholders: {title}, {content} and {url} to dynamically insert the content's information; {name} to insert the name of the user receiving the warning; and {staff} to insert the name of the staff member giving the warning. You may use BB code.]]></phrase>
   <phrase title="you_may_use_star_as_wildcard_and_id_to_point_to_media_id" version_id="1000016" version_string="1.0.0 Alpha 6"><![CDATA[You may use * as a wildcard, and {$id} to point to the media's ID. This ID will then be referenced in the embed code. Put each URL on a separate line.]]></phrase>
   <phrase title="you_may_use_star_to_represent_wildcards_automatically_added" version_id="1000016" version_string="1.0.0 Alpha 6"><![CDATA[You may use * to represent wildcards. If you do not use any wildcards, they will automatically be added where appropriate.]]></phrase>

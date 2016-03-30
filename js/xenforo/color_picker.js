@@ -1,6 +1,6 @@
 /*
  * XenForo color_picker.min.js
- * Copyright 2010-2015 XenForo Ltd.
+ * Copyright 2010-2016 XenForo Ltd.
  * Released under the XenForo License Agreement: http://xenforo.com/license-agreement
  */
 (function(d,o,k){XenForo.ColorPicker=function(a){this.__construct(a)};XenForo.ColorPicker._formInit={};XenForo.ColorPicker.prototype={__construct:function(a){var b=a.closest("form"),c=b.attr("id");c||(c=XenForo.uniqueId(),b.attr("id",c));!XenForo.ColorPicker._formInit[c]&&!b.data("XenForo.ColorPickerForm")&&(b.bind("reset",function(){setTimeout(function(){b.find("input.ColorPicker").each(function(a,b){d(b).data("XenForo.ColorPicker").updateValue(b.value)})},100)}),b.data("XenForo.ColorPickerForm",

@@ -1,6 +1,6 @@
 /*
  * XenForo acp_login.min.js
- * Copyright 2010-2015 XenForo Ltd.
+ * Copyright 2010-2016 XenForo Ltd.
  * Released under the XenForo License Agreement: http://xenforo.com/license-agreement
  */
 (function(f,j,k){XenForo.AcpLoginForm=function(c){var h=f("#loginControls"),a=f("#loginLogo"),i=f("#errorMessage"),d=c.find('input[name="login"]');d.length&&d.val()==""?d.focus():c.find('input[name="password"]').focus();c.submit(function(d){d.preventDefault();a.data("width")||(a.data("width",a.width()),a.data("margintop",a.css("margin-top")));h.xfFadeOut(XenForo.speed.normal);XenForo.ajax(c.attr("action"),c.serializeArray(),function(b){i.hide();b._redirectStatus&&b._redirectStatus=="ok"?a.animate({width:100,

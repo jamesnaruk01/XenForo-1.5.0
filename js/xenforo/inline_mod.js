@@ -1,6 +1,6 @@
 /*
  * XenForo inline_mod.min.js
- * Copyright 2010-2015 XenForo Ltd.
+ * Copyright 2010-2016 XenForo Ltd.
  * Released under the XenForo License Agreement: http://xenforo.com/license-agreement
  */
 (function(c,h,i){XenForo.InlineModForm=function(a){this.__construct(a)};XenForo.InlineModForm.prototype={__construct:function(a){a.is("form")&&a[0].reset();this.$form=a;this.$form.data("InlineModForm",this);this.$checkAll=this.$form.find("#ModerationCheck").click(c.context(this,"checkAll"));var b=c(this.$form.data("controls")),d=b.closest(".InlineMod");b.find(".SelectionCount").click(c.context(this,"nonCheckboxShowOverlay"));var e=c(".SelectionCountContainer");if(!c("#InlineModOverlay").length){b.length&&

@@ -699,7 +699,7 @@
 					titleChanged = false;
 
 					if (this.isPrimaryTemplate(templateTitle)
-						&& (this.$templateTitle.strval() != this.$titleOriginal.strval() || this.$titleOriginal.strval() === '')
+						&& ($.trim(this.$templateTitle.strval()) != this.$titleOriginal.strval() || this.$titleOriginal.strval() === '')
 					)
 					{
 						titleChanged = true;
@@ -743,7 +743,7 @@
 
 			// handle template renaming
 			var oldTitle = this.$titleOriginal.strval(),
-				newTitle = this.$templateTitle.strval();
+				newTitle = $.trim(this.$templateTitle.strval());
 
 			/**
 			 * Check to see if the stored original template title is different from that in
@@ -813,9 +813,9 @@
 				titles.push(this.$titleOriginal.strval());
 			}
 
-			if (this.$templateTitle.strval() != '')
+			if ($.trim(this.$templateTitle.strval()) != '')
 			{
-				titles.push(this.$templateTitle.strval());
+				titles.push($.trim(this.$templateTitle.strval()));
 			}
 
 			if (this.$templateTextarea.val().indexOf('{xen:pagenav') != -1)
@@ -969,7 +969,7 @@
 		 */
 		handleTitleChange: function()
 		{
-			var title = this.$templateTitle.strval();
+			var title = $.trim(this.$templateTitle.strval());
 
 			$('.tabText', this.$templateTab)
 				.html((XenForo.htmlspecialchars(title) || this.$form.data('untitled').italics()));

@@ -1,6 +1,6 @@
 /*
  * XenForo permission.min.js
- * Copyright 2010-2015 XenForo Ltd.
+ * Copyright 2010-2016 XenForo Ltd.
  * Released under the XenForo License Agreement: http://xenforo.com/license-agreement
  */
 (function(d,g,f){XenForo.PermissionChoicesOld=function(a){this.__construct(a)};XenForo.PermissionChoicesOld.prototype={__construct:function(a){var b,c={};this.$form=a;this.$selects=a.find("select.PermissionChoice");this.$revokeOption=a.find('.RevokeOption input[type="checkbox"]');a=a.find(".PermissionTooltipOption");a.length&&a.each(function(){var a=d(this);d(a.data("permissionstate").split(" ")).each(function(b,d){c[d]=a})});this.tooltipOptions=c;this.$revokeOption.click(d.context(this,"updateRevokeStatus"));

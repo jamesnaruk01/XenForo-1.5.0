@@ -6,7 +6,7 @@ header("Cache-Control: public, max-age=" . $cache_expire);
 header('Expires: ' . gmdate('D, d M Y H:i:s', time() + $cache_expire) . ' GMT');
 
 $locale = '';
-if (!empty($_GET['l']))
+if (!empty($_GET['l']) && is_string($_GET['l']))
 {
 	$locale = str_replace('-', '_', strval($_GET['l']));
 	$locale = preg_replace('/[^a-z_]/i', '', $locale);

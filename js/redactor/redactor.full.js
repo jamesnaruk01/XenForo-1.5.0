@@ -802,8 +802,11 @@ var RLANG = {
 							this.saveScroll = this.$editor.scrollTop();
 						}
 
-						var frag = null, $pasteNode;
-						if (this.browser('msie') || this.isMobile(true))
+						var frag = null, $pasteNode,
+							ua = navigator.userAgent.toLowerCase(),
+							match = /(edge)[ \/]([\w.]+)/.exec(ua) || [];
+
+						if (this.browser('msie') || this.isMobile(true) || match[1] == 'edge')
 						{
 							this.$editor.css('height', this.$editor.height() + 'px');
 							frag = this.extractContent();
@@ -2661,8 +2664,6 @@ var RLANG = {
 			// remove empty
 			html = html.replace(/<([^\/> ]+)[^>]*>(\s*|\t*|\n*|&nbsp;|<br>)<\/([^>]+)>/gi, function(match, open, inner, close)
 			{
-				console.log(open);
-				console.log(close);
 				if (open.toLowerCase() == close.toLowerCase())
 				{
 					return '';
@@ -3892,7 +3893,14 @@ var RLANG = {
 
 			if ($(origin[0]).is('.redactor_editor, body'))
 			{
+				var originalOriginNode = origin[0];
+
 				origin[0] = origin[0].childNodes[origin[1]];
+				if (!origin[0])
+				{
+					origin[0] = originalOriginNode.childNodes[origin[1] ? origin[1] - 1 : 0];
+				}
+
 				origin[1] = 0;
 			}
 

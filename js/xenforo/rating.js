@@ -1,6 +1,6 @@
 /*
  * XenForo rating.min.js
- * Copyright 2010-2015 XenForo Ltd.
+ * Copyright 2010-2016 XenForo Ltd.
  * Released under the XenForo License Agreement: http://xenforo.com/license-agreement
  */
 (function(c){XenForo.RatingWidget=function(d){var g=null,e=null,f=d.find(".Hint").each(function(){var b=c(this);b.data("text",b.text())}),h=d.find(".RatingValue .Number"),i=d.find("button").each(function(){var b=c(this);b.data("hint",b.attr("title")).removeAttr("title")}),j=function(b){i.each(function(a){c(this).toggleClass("Full",b>=a+1).toggleClass("Half",b>=a+0.5&&b<a+1)})},k=function(){j(h.text());f.text(f.data("text"))};i.bind({mouseenter:function(b){b.preventDefault();j(c(this).val());f.text(c(this).data("hint"))},

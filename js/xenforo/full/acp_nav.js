@@ -120,9 +120,79 @@
 		});
 	};
 
+	// due to the fixed header, need to adjust any anchor scrolls. We'll do this on load to cover the common case.
+	var isScrolled = false;
+	$(window).on('load', function()
+	{
+		if (isScrolled || !window.location.hash)
+		{
+			return;
+		}
+
+		var $header = $('#header');
+		if ($header.css('position') != 'fixed')
+		{
+			return;
+		}
+
+		var delay = ($.browser.webkit || ($.browser.mozilla && !navigator.userAgent.match(/Trident\//))) ? 0 : 50;
+
+		setTimeout(function() {
+			var hash = window.location.hash.replace(/[^a-zA-Z0-9_-]/g, ''),
+				$match = hash ? $('#' + hash) : $();
+
+			if ($match.length)
+			{
+				var $heightLimited = $match.parents().filter(function(index, el)
+				{
+					var $el = $(el),
+						maxHeight = $el.css('max-height');
+
+					if ($el.is('body, html'))
+					{
+						return false;
+					}
+
+					if (maxHeight && maxHeight != 'none')
+					{
+						var overflow = $el.css('overflow'),
+							overflowY = $el.css('overflow-y');
+
+						if (overflow == 'auto' || overflow == 'scroll'
+							|| overflowY == 'auto' || overflowY == 'scroll')
+						{
+							return true;
+						}
+					}
+
+					return false;
+				});
+
+				if (!$heightLimited.length)
+				{
+					var scrollTo = $match.offset().top - $header.outerHeight();
+					$('html, body').animate({scrollTop: scrollTo}, 0);
+				}
+				else
+				{
+					$match.get(0).scrollIntoView(true);
+				}
+			}
+		}, delay);
+	});
+
 	$(function()
 	{
 		XenForo.acpNavInit();
+
+		if (window.location.hash)
+		{
+			// do this after the document is ready as triggering it too early
+			// causes the initial hash to trigger a scroll
+			$(window).one('scroll', function(e) {
+				isScrolled = true;
+			});
+		}
 	});
 }
 (jQuery, this, document);

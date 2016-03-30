@@ -1,6 +1,6 @@
 /*
  * XenForo follow.min.js
- * Copyright 2010-2015 XenForo Ltd.
+ * Copyright 2010-2016 XenForo Ltd.
  * Released under the XenForo License Agreement: http://xenforo.com/license-agreement
  */
 (function(c){XenForo.UnfollowLink=function(a){this.__construct(a)};XenForo.UnfollowLink.prototype={__construct:function(a){this.$link=a.click(c.context(this,"eClick"));this.userId=a.data("userid");this.jsonUrl=a.data("jsonurl")||a.attr("href");if(this.userId===null||this.jsonUrl===null)return console.warn("Unfollow link found without userId or url defined. %o",a),!1;this.$container=c("#user_list_"+this.userId)},eClick:function(a){a.preventDefault();this.stopFollowing()},stopFollowing:function(){XenForo.ajax(this.jsonUrl,

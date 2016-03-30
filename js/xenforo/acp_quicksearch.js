@@ -1,6 +1,6 @@
 /*
  * XenForo acp_quicksearch.min.js
- * Copyright 2010-2015 XenForo Ltd.
+ * Copyright 2010-2016 XenForo Ltd.
  * Released under the XenForo License Agreement: http://xenforo.com/license-agreement
  */
 (function(c,j){XenForo.AdminSearchForm=function(f){var b=c("#AdminSearchInput"),d=c(f.data("target")),h=null,g=null,i="";b.attr("autocomplete","off").bind({keyup:function(){var a=b.strval();a!=i&&a.length>=2?(i=a,clearTimeout(h),h=setTimeout(function(){console.log('The input now reads "%s"',b.strval());g&&g.abort();g=XenForo.ajax(f.attr("action"),f.serializeArray(),function(a){if(XenForo.hasResponseError(a))return!1;XenForo.hasTemplateHtml(a)&&(d.empty().append(a.templateHtml),d.find("li").mouseleave(function(){c(this).removeClass("kbSelect")}),

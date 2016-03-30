@@ -1,6 +1,6 @@
 /*
  * XenForo smiley_editor.min.js
- * Copyright 2010-2015 XenForo Ltd.
+ * Copyright 2010-2016 XenForo Ltd.
  * Released under the XenForo License Agreement: http://xenforo.com/license-agreement
  */
 (function(b){XenForo.SmileyEditor=function(a){var c=b(a.data("smiley-output"));a.find('input[name="image_url"]');var d=a.find('input[name="sprite_mode"]'),e=a.find('input[name="sprite_params[w]"]'),f=a.find('input[name="sprite_params[h]"]'),g=a.find('input[name="sprite_params[x]"]'),h=a.find('input[name="sprite_params[y]"]');c.length?a.find("input").not("input[type=button]").not("input[type=submit]").bind("change",function(){var b=a.find("#ctrl_image_url");d.is(":checked")?c.attr("src","styles/default/xenforo/clear.png").css({width:e.val(),

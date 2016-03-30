@@ -1,6 +1,6 @@
 /*
  * XenForo news_feed.min.js
- * Copyright 2010-2015 XenForo Ltd.
+ * Copyright 2010-2016 XenForo Ltd.
  * Released under the XenForo License Agreement: http://xenforo.com/license-agreement
  */
 (function(b){XenForo.NewsFeedLoader=function(a){this.__construct(a)};XenForo.NewsFeedLoader.prototype={__construct:function(a){this.$link=a.click(b.context(this,"load"));this.xhr=null},load:function(a){a.preventDefault();a.target.blur();if(this.xhr===null&&this.$link.attr("href"))this.xhr=XenForo.ajax(this.$link.attr("href"),{news_feed_id:this.$link.data("oldestitemid")},b.context(this,"display"));return!1},display:function(a){this.xhr=null;if(XenForo.hasResponseError(a))return!1;this.$link.data("oldestitemid",

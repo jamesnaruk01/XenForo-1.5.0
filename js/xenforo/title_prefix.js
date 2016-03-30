@@ -1,6 +1,6 @@
 /*
  * XenForo title_prefix.min.js
- * Copyright 2010-2015 XenForo Ltd.
+ * Copyright 2010-2016 XenForo Ltd.
  * Released under the XenForo License Agreement: http://xenforo.com/license-agreement
  */
 (function(b,s,t){XenForo.TitlePrefix=function(d){function p(a){var q,c=d.val();d.find("option, optgroup").not("[value=0]").empty().remove();b.each(a,function(a,c){a=c.prefix_group_id;q=a!=0?b("<optgroup />").attr("label",c.title).appendTo(d):d;b.each(c.prefixes,function(c,a){c=a.prefix_id;b("<option />").attr("value",c).data("css",a.css).text(a.title).appendTo(q)})});r(i);var f=j;setTimeout(function(){var a=d.find("option[value="+f+"]");a.length<1&&(a=d.find("option[value=0]"));k(a.data("link"),!0)},

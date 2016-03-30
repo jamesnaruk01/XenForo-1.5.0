@@ -62,11 +62,14 @@
 				$replace.xfFadeUp().replaceWith($els);
 				$els.xfActivate().xfFadeDown();*/
 
-				for (i = 0; i < ajaxData.comments.length; i++)
+				new XenForo.ExtLoader(ajaxData, function(data)
 				{
-					$(ajaxData.comments[i]).xfInsert('insertBefore', $replace);
-				}
-				$replace.xfHide();
+					for (i = 0; i < ajaxData.comments.length; i++)
+					{
+						$(ajaxData.comments[i]).xfInsert('insertBefore', $replace);
+					}
+					$replace.xfHide();
+				});
 			}
 			else
 			{

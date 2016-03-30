@@ -1,6 +1,6 @@
 /*
  * XenForo event_listener.min.js
- * Copyright 2010-2015 XenForo Ltd.
+ * Copyright 2010-2016 XenForo Ltd.
  * Released under the XenForo License Agreement: http://xenforo.com/license-agreement
  */
 (function(b){XenForo.EventListenerOption=function(a){this.__construct(a)};XenForo.EventListenerOption.prototype={__construct:function(a){this.$select=a;this.url=a.data("descurl");this.$target=b(a.data("desctarget"));this.url&&this.$target.length&&(a.bind({keyup:b.context(this,"fetchDescriptionDelayed"),change:b.context(this,"fetchDescription")}),a.val().length&&this.fetchDescription())},fetchDescriptionDelayed:function(){this.delayTimer&&clearTimeout(this.delayTimer);this.delayTimer=setTimeout(b.context(this,

@@ -582,6 +582,8 @@
 					blurTimeout = null;
 				}
 				ed.$box.addClass('focused');
+
+				$(ed.$box[0].ownerDocument).trigger('HideAllMenus');
 			});
 			ed.$editor.on('blur', function(e) {
 				blurTimeout = setTimeout(function() {
@@ -856,21 +858,33 @@
 
 			if (blur)
 			{
-				var ed = api.$editor;
-				if (api.opts.iframe && ed[0])
-				{
-					var doc = ed[0].ownerDocument;
-					if (doc)
-					{
-						// strange, but a focus call here sorts and issue with the iOS8 cursor being stuck
-						(doc.defaultView || doc.parentWindow).focus();
-					}
-				}
+				this.blurEditor();
+			}
+		},
 
-				if (!$.browser.msie)
+		blurEditor: function()
+		{
+			if (!this.$textarea.data('redactor'))
+			{
+				return;
+			}
+
+			var api = this.api,
+				ed = api.$editor;
+
+			if (api.opts.iframe && ed[0])
+			{
+				var doc = ed[0].ownerDocument;
+				if (doc)
 				{
-					ed.blur();
+					// strange, but a focus call here sorts an issue with the iOS8 cursor being stuck
+					(doc.defaultView || doc.parentWindow).focus();
 				}
+			}
+
+			if (!$.browser.msie)
+			{
+				ed.blur();
 			}
 		},
 
@@ -1666,7 +1680,7 @@
 			code = code.replace(/&/g, '&amp;').replace(/</g, '&lt;')
 				.replace(/>/g, '&gt;').replace(/"/g, '&quot;')
 				.replace(/\t/g, '    ').replace(/  /g, '&nbsp; ')
-				.replace(/  /g, '&nbsp; ') // need to do this twice to catch a situation where there are an odd number of spaces
+				.replace(/  /g, ' &nbsp;') // need to do this twice to catch a situation where there are an odd number of spaces
 				.replace(/\n/g, '</p>\n<p>');
 
 			output = '[' + tag + ']' + code + '[/' + tag + ']';
@@ -2024,6 +2038,10 @@
 					else
 					{
 						output = '<p>' + inner.replace(/\r?\n/g, '</p><p>') + '</p>';
+						output = output.replace(/\t/g, '    ')
+							.replace(/  /g, '&nbsp; ')
+							.replace(/  /g,  ' &nbsp;') // need to do this twice to catch a situation where there are an odd number of spaces
+							.replace(/<span[^>]*>(&nbsp;|<br>)<\/span>/gi, '$1');
 					}
 
 					return output.replace(/<p([^>]*)>(\s*|<br\s*\/?>|&nbsp;)<\/p>/gi, '<p$1>' + (isIE ? '' : '<br>') + '<span><span></span></span></p>');

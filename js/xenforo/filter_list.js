@@ -1,6 +1,6 @@
 /*
  * XenForo filter_list.min.js
- * Copyright 2010-2015 XenForo Ltd.
+ * Copyright 2010-2016 XenForo Ltd.
  * Released under the XenForo License Agreement: http://xenforo.com/license-agreement
  */
 (function(b,g){XenForo.FilterList=function(a){this.__construct(a)};XenForo.FilterList.prototype={__construct:function(a){this.$list=a;this.$form=this.$list.closest("form").bind("AutoValidationComplete",b.context(function(){this.$form.find("input.Toggler").each(function(){b(this).closest("h4").toggleClass("disabled",!this.checked)})},this));this.$listCounter=this.$form.find(".FilterListCount");this.lookUpUrl=XenForo.isPositive(this.$list.data("ajaxfilter"))?this.$form.attr("action"):!1;this.registerListItems();
